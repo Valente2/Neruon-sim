@@ -1,29 +1,25 @@
-import time
-count = int(input("enter the dendrite amount"))
-binary = False
-      
-if count <= 0:
-    print("Invalid size. Please enter a positive integer.")
-    exit
-ans = [0] * count 
-w = [0] * count #Make an arry of zeros for the weights       
-vol = [0] * count  # Create an array of zeros with the specified size
-print(f"Enter {count} voltages, one at a time:")
-        
-    # Keep reading values until the array is filled
-for i in range(count):
-    element = float(input(f"Voltage {i + 1}: "))
-    vol[i] = element  # Assign the element to the array at the specified index
-time.sleep(2)
+import tkinter as tk
+from tkinter import simpledialog
 
-for i in range(count):
-    e = float(input(f"Weight {i + 1}: "))
-    w[i] = e
+# Create the main application window
+root = tk.Tk()
+root.withdraw()  # Hide the main window
 
-time.sleep(3)
+# Show an input dialog
+count = simpledialog.askstring("Input", "Enter the amount of denderites: ",)
+count = int(count)
+vol = [0] * count
+w = [0] * count
+ans = [0] * count
 
-b = float(input("enter the bias "))
-
+for x in range(count):
+    vol[x] = simpledialog.askstring("Input", "Enter the voltage of denderite")
+    vol[x] = float(vol[x])
+    w[x] = simpledialog.askstring("Input", "Enter the weight of denderite")
+    w[x] = float(w[x])
+    x = x + 1
+b = simpledialog.askstring("Input", "Enter the bias: ")
+b = float(b)
 #math time
 
 for x in range(count): #This is for the multiplication
