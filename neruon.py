@@ -32,22 +32,22 @@ print("The output voltage of the neruon is", total)
 
 if total >= -0.055:
     binary = True
-if total < -0.055:
+else:
     binary = False
 
-question = input("would you like the full data table?(Y/N) ")
-if question == "Y" or "y":
-    print("Denderite amount", count)
-    for x in range(count):
-        print("Voltage", x + 1 , vol[x])
-    for x in range(count):
-        print("Weght", x + 1 , w[x] ) 
-    print("Bias:",b)
-    print("Binary: ",binary)
-    time.sleep(100)
-    exit
-if question == "N" or "n":
-    exit
+root2 = tk.Tk()
+messagebox.showinfo("Output", "The output voltage of the neruon is " + str(total) + " and the binary output is " + str(binary))
+question = messagebox.askquestion("Question", "Do you want the data to be saved?")
+
+
+if question == "yes":
+    file = open("data.txt", "w")
+    file.write("The amount of dentrdrites is " + str(count) + "\n")
+    
+    file.write("The output voltage of the neruon is " + str(total) + " and the binary output is " + str(binary))
+    
+    file.close()    
+
     
       
     
