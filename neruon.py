@@ -1,29 +1,30 @@
-import time
-count = int(input("enter the dendrite amount"))
-binary = False
-      
-if count <= 0:
-    print("Invalid size. Please enter a positive integer.")
-    exit
-ans = [0] * count 
-w = [0] * count #Make an arry of zeros for the weights       
-vol = [0] * count  # Create an array of zeros with the specified size
-print(f"Enter {count} voltages, one at a time:")
-        
-    # Keep reading values until the array is filled
-for i in range(count):
-    element = float(input(f"Voltage {i + 1}: "))
-    vol[i] = element  # Assign the element to the array at the specified index
-time.sleep(2)
+import tkinter as tk
+from tkinter import simpledialog 
+from tkinter import messagebox
 
-for i in range(count):
-    e = float(input(f"Weight {i + 1}: "))
-    w[i] = e
+# Create the main application window
+root = tk.Tk()
+root.withdraw()  # Hide the main window
 
-time.sleep(3)
+# Show an input dialog
+count = simpledialog.askstring("Input", "Enter the amount of denderites: ",)
+if count is None or not count.isdigit():  # Check if input is valid
+    messagebox.showerror("Error", "Invalid input! Please enter a valid number.")
+    root.destroy()  # Close the application if input is invalid
+    exit()
+count = int(count)
+vol = [0] * count
+w = [0] * count
+ans = [0] * count
 
-b = float(input("enter the bias "))
-
+for x in range(count):
+    vol[x] = simpledialog.askstring("Input", "Enter the voltage of denderite")
+    vol[x] = float(vol[x])
+    w[x] = simpledialog.askstring("Input", "Enter the weight of denderite")
+    w[x] = float(w[x])
+    x = x + 1
+b = simpledialog.askstring("Input", "Enter the bias: ")
+b = float(b)
 #math time
 
 for x in range(count): #This is for the multiplication
@@ -36,29 +37,40 @@ print("The output voltage of the neruon is", total)
 
 if total >= -0.055:
     binary = True
-if total < -0.055:
+else:
     binary = False
 
-question = input("would you like the full data table?(Y/N) ")
-if question == "Y" or "y":
-    print("Denderite amount", count)
+
+messagebox.showinfo("Output", "The output voltage of the neruon is " + str(total) + " and the binary output is " + str(binary))
+question = simpledialog.askstring("Question", "Do you want the data to be saved?")
+
+
+if question == "yes":
+    file = open("data.txt", "w")
+    file.write("The amount of dentrdrites is " + str(count) + "\n")
     for x in range(count):
-        print("Voltage", x + 1 , vol[x])
-    for x in range(count):
-        print("Weght", x + 1 , w[x] ) 
-    print("Bias:",b)
-    print("Binary: ",binary)
-    time.sleep(100)
-    exit
-if question == "N" or "n":
-    exit
-    
-      
-    
+        file.write("The voltage of dendrite " + str(count) + " is " + str(vol[x]) + "\n")
+        file.write("The weight of dendrite " + str(count) + " is " + str(w[x]) + "\n")
+        x = x + 1
+    file.write("The output voltage of the neruon is " + str(total) + " and the binary output is " + str(binary) +"\end" )
+    file.close()    
+elif question == "no":
+    messagebox.showinfo("Output", "The data was not saved")
+else:
+    messagebox.showinfo("Error", "Invalid input")
+root.deiconify()  # Show the main window
+root.title("Neruon")
+root.geometry("400x400")
+root.configure(bg="white")
 
 
+text_box = tk.Text(root, height=10, width=40, font=("Arial", 12))
+text_box.pack(pady=10)
 
-
-    
-    
-
+text_box.insert("1.0", "The amount of dentrdrites is " + str(count) + "\n")
+for x in range(count):
+    text_box.insert("end", "The voltage of dendrite " + str(x) + " is " + str(vol[x]) + "\n")
+    text_box.insert( "end " ,"The weight of dendrite " + str(x) + " is " + str(w[x]) + "\n")
+    x = x + 1
+text_box.insert("end ", "The output voltage of the neruon is " + str(total) + " and the binary output is " + str(binary) +"\n" )
+root.mainloop()  # Start the main loop
