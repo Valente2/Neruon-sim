@@ -1,0 +1,4 @@
+The amount of dentrdrites is 1
+The voltage of dendrite 1 is 12.0
+The weight of dendrite 1 is -23.0
+The output voltage of the neruon is -276.0 and the binary output is False\end
