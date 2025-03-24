@@ -8,4 +8,4 @@ and tada
 
 
 BUGS / PROBLEMS
-If there is someone who knows C and could make a port that would be really  nice
+So far I don't have any problems with it
